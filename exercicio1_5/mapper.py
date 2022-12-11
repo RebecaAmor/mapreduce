@@ -11,6 +11,7 @@ import sys
 for line in sys.stdin:
     data = line.strip().split("\t")
     date, time, store, item, cost, payment = data
-    print(sum(cost))
+    lista=list(map(float,cost))
+    print(sum(lista))
     if line in sys.stdin !=len(6):
         continue
