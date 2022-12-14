@@ -1,17 +1,21 @@
 #!/usr/bin/python
 
-# Format of each line is:
-# date\ttime\tstore name\titem description\tcost\tmethod of payment
-#
-# We want elements 2 (store name) and 4 (cost)
-# We need to write them out to standard output, separated by a tab
-
 import sys
+
+sales_totals = {}
 
 for line in sys.stdin:
     data = line.strip().split("\t")
-    date, time, store, item, cost, payment = data
-    list=[cost]
-    print(max([int(cost) for cost in list]))
-    if line in sys.stdin !=len(6):
+
+    if len(data) != 2:
         continue
+
+    this_key, this_sale = data
+
+    if this_key in sales_totals:
+        sales_totals[this_key] += float(this_sale)
+    else:
+        sales_totals[this_key] = float(this_sale)
+        
+for this_key, total in sales_totals.items():
+    print(this_key+": "+str(total))
