@@ -8,9 +8,19 @@
 
 import sys
 
+sales_totals = {}
+
 for line in sys.stdin:
-    data = line.strip().split("\t")
-    date, time, store, item, cost, payment = data
-    print(item+"\t"+payment)
-    if line in sys.stdin !=len(6):
-        continue
+	data = line.strip().split("\t")
+	date, time, store, item, cost, payment = data
+
+	if len(data)!=6:
+		continue
+  
+	if item in sales_totals:
+		sales_totals[item] += float(cost)
+	else:
+		sales_totals[item] = float(cost)
+
+for item, total in sales_totals.items():
+    print(item+": "+str(total))
